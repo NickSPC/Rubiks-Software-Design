@@ -7,6 +7,7 @@ import MoveCounter from "./components/MoveCounter";
 import GameStatus from "./components/GameStatus";
 import Timer from "./components/Timer";
 import HistoryPanel from "./components/HistoryPanel";
+import NotationGuide from "./components/NotationGuide";
 import "./App.css";
 
 // Logo: un mini cubo de 3x3 con los colores del cubo
@@ -66,7 +67,7 @@ export default function App() {
           </div>
         </div>
         <div className="tags">
-          <span className="tag">React</span>S
+          <span className="tag">React</span>
           <span className="tag">Three.js</span>
           <span className="tag">Observer</span>
         </div>
@@ -74,9 +75,38 @@ export default function App() {
 
       <main className="layout">
         {/* Izquierda: giros de cada cara */}
-        <aside className="panel area-left">
-          <h2 className="panel-title">Capas</h2>
-          <Controls onMove={requestMove} />
+        <aside className="area-left">
+          <section className="panel">
+            <h2 className="panel-title">Capas</h2>
+            <Controls onMove={requestMove} />
+          </section>
+
+          <section className="panel">
+            <h2 className="panel-title">Atajos Del Teclado</h2>
+            <ul className="shortcuts">
+              <li>
+                <span>Girar capa</span>
+                <span>
+                  <kbd>U</kbd> <kbd>D</kbd> <kbd>R</kbd> <kbd>L</kbd>{" "}
+                  <kbd>F</kbd> <kbd>B</kbd>
+                </span>
+              </li>
+              <li>
+                <span>Sentido inverso</span>
+                <span>
+                  <kbd>Shift</kbd> + tecla
+                </span>
+              </li>
+              <li>
+                <span>Mezclar</span>
+                <kbd>S</kbd>
+              </li>
+              <li>
+                <span>Reiniciar</span>
+                <kbd>Esc</kbd>
+              </li>
+            </ul>
+          </section>
         </aside>
 
         {/* Centro: cubo 3D con cronómetro, estado y acciones encima */}
@@ -105,32 +135,7 @@ export default function App() {
 
           <HistoryPanel history={history} />
 
-          <section className="panel">
-            <h2 className="panel-title">Atajos</h2>
-            <ul className="shortcuts">
-              <li>
-                <span>Girar cara</span>
-                <span>
-                  <kbd>U</kbd> <kbd>D</kbd> <kbd>R</kbd> <kbd>L</kbd>{" "}
-                  <kbd>F</kbd> <kbd>B</kbd>
-                </span>
-              </li>
-              <li>
-                <span>Sentido inverso</span>
-                <span>
-                  <kbd>Shift</kbd> + tecla
-                </span>
-              </li>
-              <li>
-                <span>Mezclar</span>
-                <kbd>S</kbd>
-              </li>
-              <li>
-                <span>Reiniciar</span>
-                <kbd>Esc</kbd>
-              </li>
-            </ul>
-          </section>
+          <NotationGuide />
         </aside>
       </main>
     </div>

@@ -1,7 +1,7 @@
 import type { Observer } from "../patterns/Observer";
 import type { CubeEvent } from "../models/CubeEvent";
 
-// ready = listo para empezar, playing = en juego, solved = cubo resuelto
+// ready = listo para empezar, playing = Resolviendo, solved = cubo resuelto
 export type GameStatus = "ready" | "playing" | "solved";
 
 // Mantiene el estado actual de la partida

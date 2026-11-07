@@ -62,6 +62,9 @@
 
 .area-left {
   grid-area: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   align-self: start;
 }
 
@@ -482,4 +485,65 @@ button {
   .hud .status-solved {
     animation: none;
   }
+}
+
+/* ---------- Guía de notación ---------- */
+.guide-text {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.guide-list {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.8rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.guide-face-name {
+  min-width: 5.2rem;
+}
+
+.guide-letter {
+  display: inline-grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--face-color);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  box-shadow: 0 0 12px -4px var(--face-color);
+  color: var(--face-color);
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.guide-english {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.guide-example {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.8rem 0 0;
+  padding: 0.7rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.guide-sequence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 }

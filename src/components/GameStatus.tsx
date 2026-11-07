@@ -6,7 +6,7 @@ import type {
 // Texto que se muestra para cada estado de la partida
 const STATUS_LABELS: Record<Status, string> = {
   ready: "Listo",
-  playing: "En juego",
+  playing: "Resolviendo",
   solved: "¡Resuelto!",
 };
 

@@ -43,7 +43,7 @@ Mezclar inicia una partida nueva y registra la secuencia aplicada. Reiniciar dev
 
 - **Cubo 3D:** las 26 piezas móviles del cubo (esquinas, aristas y centros de cara), con sus stickers y animaciones.
 - **Tiempo:** duración de la partida, presentada en minutos, segundos y décimas.
-- **Estado:** `Listo`, `En juego` o `¡Resuelto!`.
+- **Estado:** `Listo`, `Resolviendo` o `¡Resuelto!`.
 - **Movimientos:** cantidad de giros realizados desde la última mezcla o reinicio.
 - **Historial:** secuencia de la última mezcla y movimientos posteriores del usuario. Se muestran como máximo los últimos 30 movimientos; si hay más, se indica cuántos quedaron ocultos.
 

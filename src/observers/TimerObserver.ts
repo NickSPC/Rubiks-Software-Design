@@ -1,35 +1,51 @@
 import type { Observer } from "../patterns/Observer";
 import type { CubeEvent } from "../models/CubeEvent";
 
-// Mide el tiempo de resolución: arranca en el primer movimiento
-// y se detiene cuando el cubo queda resuelto
+// Mide el tiempo de resolución: arranca en el primer movimiento, se pausa cuando
+// el cubo queda resuelto y se retoma si el usuario vuelve a mover el cubo.
+// El tiempo que el cubo estuvo resuelto no se cuenta
 export class TimerObserver implements Observer<CubeEvent> {
-    private startTime: number | null = null;
-    private endTime: number | null = null;
+    // Se puso en marcha al menos una vez desde la última mezcla o reinicio
+    private started = false;
+    // Tiempo acumulado en los tramos que ya terminaron (milisegundos)
+    private accumulatedMs = 0;
+    // Momento en que arrancó el tramo actual (null si el reloj está pausado)
+    private runningSince: number | null = null;
 
     update(event: CubeEvent): void {
+        // Mezcla o reinicio: partida nueva, el reloj vuelve a cero
         if (event.type !== "move") {
-            // Scramble o reset: se reinicia el cronómetro
-            this.startTime = null;
-            this.endTime = null;
+            this.started = false;
+            this.accumulatedMs = 0;
+            this.runningSince = null;
             return;
         }
-        if (this.startTime === null) {
-            this.startTime = Date.now();
+
+        const now = Date.now();
+
+        if (!this.started) {
+            // Primer movimiento de la partida
+            this.started = true;
+            this.runningSince = now;
+        } else if (this.runningSince === null && !event.isSolved) {
+            // El cubo estaba resuelto y se volvió a mover: se retoma el conteo
+            this.runningSince = now;
         }
-        if (event.isSolved && this.endTime === null) {
-            this.endTime = Date.now();
+
+        if (event.isSolved && this.runningSince !== null) {
+            // El cubo quedó resuelto: se cierra el tramo y el reloj se pausa
+            this.accumulatedMs += now - this.runningSince;
+            this.runningSince = null;
         }
     }
 
     get isRunning(): boolean {
-        return this.startTime !== null && this.endTime === null;
+        return this.runningSince !== null;
     }
 
     // Tiempo transcurrido en milisegundos
     get elapsedMs(): number {
-        if (this.startTime === null) return 0;
-        const end = this.endTime ?? Date.now();
-        return end - this.startTime;
+        if (this.runningSince === null) return this.accumulatedMs;
+        return this.accumulatedMs + (Date.now() - this.runningSince);
     }
 }
