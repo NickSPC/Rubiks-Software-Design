@@ -18,16 +18,20 @@ export default function Controls({ onMove }: ControlsProps) {
           <div
             key={face}
             className="face-card"
+            role="group"
+            aria-label={`Cara ${name}`}
             style={{ "--face-color": color } as CSSProperties}
           >
             <div className="face-header">
-              <span className="face-dot" />
+              <span className="face-dot" aria-hidden="true" />
               <span className="face-name">{name}</span>
             </div>
             <div className="face-buttons">
               <button
                 className="move-btn"
                 onClick={() => onMove(face)}
+                aria-label={`${face}: ${name}, sentido horario`}
+                aria-keyshortcuts={face}
                 title={`${name}, horario (tecla ${face})`}
               >
                 {face}
@@ -35,6 +39,8 @@ export default function Controls({ onMove }: ControlsProps) {
               <button
                 className="move-btn"
                 onClick={() => onMove(counterClockwise)}
+                aria-label={`${counterClockwise}: ${name}, sentido antihorario`}
+                aria-keyshortcuts={`Shift+${face}`}
                 title={`${name}, antihorario (Shift + ${face})`}
               >
                 {counterClockwise}

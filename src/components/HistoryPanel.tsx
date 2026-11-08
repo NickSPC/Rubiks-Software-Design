@@ -30,7 +30,7 @@ export default function HistoryPanel({ history }: HistoryPanelProps) {
         {visible.length === 0 ? (
           <p className="empty">Todavía no hiciste movimientos</p>
         ) : (
-          <ul className="chips">
+          <ul className="chips" aria-label="Movimientos hechos">
             {hidden > 0 && <li className="chip chip-more">+{hidden}</li>}
             {visible.map((move, index) => (
               <li

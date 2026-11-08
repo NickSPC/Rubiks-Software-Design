@@ -7,8 +7,13 @@ import type { Cubie, Vec3 } from "../models/Cubie";
 import { describeMove } from "../models/MoveRotation";
 import type { MoveAnimation } from "../hooks/useRubikCube";
 
+// Si la persona pidió "reducir movimiento" en su sistema, los giros son casi instantáneos
+const PREFERS_REDUCED_MOTION =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 // Duración de cada giro, en segundos
-const ANIMATION_DURATION = 0.25;
+const ANIMATION_DURATION = PREFERS_REDUCED_MOTION ? 0.01 : 0.25;
 
 // Nombre de la propiedad de rotación de Three.js para cada eje
 const AXIS_KEYS = ["x", "y", "z"] as const;
@@ -158,7 +163,12 @@ export default function Cube3D({
   onAnimationEnd,
 }: Cube3DProps) {
   return (
-    <Canvas camera={{ position: [4.4, 3.8, 5.8], fov: 42 }} dpr={[1, 2]}>
+    <Canvas
+      camera={{ position: [4.4, 3.8, 5.8], fov: 42 }}
+      dpr={[1, 2]}
+      role="img"
+      aria-label="Cubo Rubik de 3x3 en 3D. Se gira la cámara arrastrando con el mouse o el dedo."
+    >
       <ambientLight intensity={1} />
       <directionalLight position={[5, 8, 6]} intensity={1.8} />
       <directionalLight position={[-6, -3, -4]} intensity={0.6} />

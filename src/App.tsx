@@ -74,8 +74,30 @@ export default function App() {
       </header>
 
       <main className="layout">
-        {/* Izquierda: giros de cada cara */}
-        <aside className="area-left">
+        {/* Centro: cubo 3D con cronómetro, estado y acciones encima.
+            Va primero en el HTML para que el orden del teclado siga el orden visual
+            (la posición en pantalla la define el CSS con grid-area) */}
+        <section
+          className="viewport area-stage"
+          aria-label="Escenario del cubo"
+        >
+          <Cube3D
+            cubies={cube.getCubies()}
+            animation={animation}
+            onAnimationEnd={onAnimationEnd}
+          />
+          <div className="hud">
+            <Timer timer={timer} />
+            <GameStatus status={status} />
+          </div>
+          <p className="hint">
+            Arrastrá para girar la cámara · rueda para acercar
+          </p>
+          <ActionBar onScramble={scramble} onReset={reset} />
+        </section>
+
+        {/* Izquierda: giros de cada cara y atajos del teclado */}
+        <aside className="area-left" aria-label="Controles del cubo">
           <section className="panel">
             <h2 className="panel-title">Capas</h2>
             <Controls onMove={requestMove} />
@@ -109,25 +131,8 @@ export default function App() {
           </section>
         </aside>
 
-        {/* Centro: cubo 3D con cronómetro, estado y acciones encima */}
-        <section className="viewport area-stage">
-          <Cube3D
-            cubies={cube.getCubies()}
-            animation={animation}
-            onAnimationEnd={onAnimationEnd}
-          />
-          <div className="hud">
-            <Timer timer={timer} />
-            <GameStatus status={status} />
-          </div>
-          <p className="hint">
-            Arrastrá para girar la cámara · rueda para acercar
-          </p>
-          <ActionBar onScramble={scramble} onReset={reset} />
-        </section>
-
-        {/* Derecha: contador, historial y atajos */}
-        <aside className="area-right">
+        {/* Derecha: contador, historial y guía de notación */}
+        <aside className="area-right" aria-label="Información de la partida">
           <section className="panel">
             <h2 className="panel-title">Partida</h2>
             <MoveCounter counter={counter} />

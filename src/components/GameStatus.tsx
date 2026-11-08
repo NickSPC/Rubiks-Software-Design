@@ -17,7 +17,7 @@ interface GameStatusProps {
 // Muestra el estado actual de la partida
 export default function GameStatus({ status }: GameStatusProps) {
   return (
-    <div className={`info-card status-${status.status}`}>
+    <div className={`info-card status-${status.status}`} role="status">
       <span className="info-label">Estado</span>
       <span className="info-value">{STATUS_LABELS[status.status]}</span>
     </div>

@@ -301,12 +301,12 @@ button {
 
 .btn-primary {
   border-color: transparent;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  box-shadow: 0 8px 24px -8px rgba(99, 102, 241, 0.8);
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  box-shadow: 0 8px 24px -8px rgba(79, 70, 229, 0.8);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #7578f5, #9b6ff8);
+  background: linear-gradient(135deg, #4338ca, #6d28d9);
 }
 
 /* ---------- Panel de capas ---------- */
@@ -413,7 +413,7 @@ button {
 }
 
 .chip-last {
-  background: var(--accent);
+  background: #4f46e5;
   color: white;
 }
 
@@ -485,6 +485,11 @@ button {
   .hud .status-solved {
     animation: none;
   }
+
+  .btn,
+  .move-btn {
+    transition: none;
+  }
 }
 
 /* ---------- Guía de notación ---------- */
@@ -546,4 +551,20 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
+}
+
+/* ---------- Accesibilidad ---------- */
+/* Anillo visible al navegar con el teclado */
+:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+.btn:focus-visible {
+  outline-offset: 3px;
+}
+
+.move-btn:focus-visible {
+  outline-color: var(--face-color);
+  box-shadow: 0 0 16px -4px var(--face-color);
 }

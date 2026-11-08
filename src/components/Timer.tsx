@@ -28,7 +28,7 @@ export default function Timer({ timer }: TimerProps) {
   }, [isRunning]);
 
   return (
-    <div className="info-card">
+    <div className="info-card" role="timer">
       <span className="info-label">Tiempo</span>
       <span className="info-value">{formatTime(timer.elapsedMs)}</span>
     </div>
